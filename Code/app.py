@@ -48,25 +48,40 @@ def names():
 
     """Return a list of all passenger names"""
     # Query all passengers
-    results = session.query(Geography.name, Geography.alpha3, Geography.region, Geography.subregion).all()
+    #results = session.query(Geography.name, Geography.alpha3, Geography.region, Geography.subregion).all()
+    results = session.query(Totals.country_code, Totals.year, Totals.quantity).all()
 
     session.close()
 
-    all_geographies = []
-    for name, alpha3, region, subregion, in results:
+    # all_geographies = []
+    # for name, alpha3, region, subregion, in results:
+    #     geography_dict = {}
+    #     geography_dict["name"] = name
+    #     geography_dict["alpha3"] = alpha3
+    #     geography_dict["region"] = region
+    #     geography_dict["subregion"] = subregion
+    #     all_geographies.append(geography_dict)
+
+    my_var = 1
+
+    all_totals = []
+    for country_code, year, quantity, in results:
         geography_dict = {}
-        geography_dict["name"] = name
-        geography_dict["alpha3"] = alpha3
-        geography_dict["region"] = region
-        geography_dict["subregion"] = subregion
-        all_geographies.append(geography_dict)
+        geography_dict["ugh"] = my_var
+        geography_dict["name"] = country_code
+        geography_dict["alpha3"] = country_code
+        geography_dict["year"] = year
+        geography_dict["quantity"] = quantity
+        all_totals.append(geography_dict)
+        my_var = my_var + 1
 
     
 
     # Convert list of tuples into normal list
     #all_names = list(np.ravel(results))
+    #print(results.length())
 
-    return jsonify(all_geographies)
+    return jsonify(all_totals)
 
 
 
