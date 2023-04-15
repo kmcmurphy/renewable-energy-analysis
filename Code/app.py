@@ -47,13 +47,13 @@ def welcome():
     """List all available api routes."""
     return (
         f"Available Routes:<br/>"
-        f"<a href=\'/api/v1.0/energy/totalenergy\'>/api/v1.0/energy/totalenergy</a><br/>"
-        f"<a href=\'/api/v1.0/energy/hydrochange\'>/api/v1.0/energy/hydrochange</a><br/>"
-        f"<a href=\'/api/v1.0/energy/hydrogen\'>/api/v1.0/energy/hydrogen</a><br/>"
-        f"<a href=\'/api/v1.0/energy/windchange\'>/api/v1.0/energy/windchange</a><br/>"
-        f"<a href=\'/api/v1.0/energy/windgen\'>/api/v1.0/energy/windgen</a><br/>"
-        f"<a href=\'/api/v1.0/energy/solarchange\'>/api/v1.0/energy/solarchange</a><br/>"
-        f"<a href=\'/api/v1.0/energy/solargen\'>/api/v1.0/energy/solargen</a><br/>"
+        f"<a href=\'http://127.0.0.1:5000/api/v1.0/energy/totalenergy\'>/api/v1.0/energy/totalenergy</a><br/>"
+        f"<a href=\'http:/127.0.0.1:5000/api/v1.0/energy/hydrochange\'>/api/v1.0/energy/hydrochange</a><br/>"
+        f"<a href=\'http:/127.0.0.1:5000/api/v1.0/energy/hydrogen\'>/api/v1.0/energy/hydrogen</a><br/>"
+        f"<a href=\'http:/127.0.0.1:5000/api/v1.0/energy/windchange\'>/api/v1.0/energy/windchange</a><br/>"
+        f"<a href=\'http:/127.0.0.1:5000/api/v1.0/energy/windgen\'>/api/v1.0/energy/windgen</a><br/>"
+        f"<a href=\'http:/127.0.0.1:5000/api/v1.0/energy/solarchange\'>/api/v1.0/energy/solarchange</a><br/>"
+        f"<a href=\'http:/127.0.0.1:5000/api/v1.0/energy/solargen\'>/api/v1.0/energy/solargen</a><br/>"
     )
 
 
