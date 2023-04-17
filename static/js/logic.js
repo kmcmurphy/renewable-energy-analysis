@@ -1,5 +1,11 @@
-/// Get the select element forr the new API call
+// Get the select element for the new API call
 let select = document.getElementById("select-table");
+
+// Get the default selected value (the first option in the select element)
+let defaultSelectedValue = select.options[1].value;
+
+// Call the function to update all the charts based on the default selected value
+updateCharts(defaultSelectedValue);
 
 // Add event listener to detect when a new option is selected
 select.addEventListener("change", function() {
@@ -10,13 +16,14 @@ select.addEventListener("change", function() {
   updateCharts(selectedValue);
 });
 
+
 function updateCharts(selectedValue) {
   // Use D3 to get the data from the API for the selected value
   d3.json(`http://127.0.0.1:5000/api/v1.0/energy/${selectedValue}`).then(function(data) {
-    // The data is the same for all charts. Give a name for each chart data
+    // The data is the same for both charts. Give a name for each chart data
     const barData = data;
     const pieData = data;
-    // const mapData = data;
+    
 
     // Create the bar chart and pie chart using the data
     displayCharts(barData, pieData);
@@ -65,7 +72,7 @@ function displayCharts(barData, pieData) {
   const barChart = [];
 
 // Define an array of colors for the bars
-const colors = ['red', 'green', 'blue', 'orange', 'purple', 'pink', 'gray', 'brown', 'teal', 'magenta'];
+const colors = ['#fa6e6e', '#ea6589', '#cf659e', '#ac68ab', '#846bae', '#5d6ca7', '#3a6a98', '#236483', '#215d6d', '#2a5458'];
 
   // Loop through the top 10 alpha3 objects to create the traces for the bar chart
   barChartData.forEach(function(alpha3Data, i) {
@@ -78,6 +85,7 @@ const colors = ['red', 'green', 'blue', 'orange', 'purple', 'pink', 'gray', 'bro
       y: quantities,
       name: alpha3,
       type: "bar",
+      title: 'top ten countries',
       marker: {
         color: colors[i],
         line : {
@@ -95,10 +103,11 @@ const colors = ['red', 'green', 'blue', 'orange', 'purple', 'pink', 'gray', 'bro
   pieData.forEach(function(item) {
     let sub = item.subregion;
     let quantity = item.quantity;
-
+    let reg = item.region;
     pieChartData.push({ subregion: sub,
        quantity: quantity,
-      color: 'lightgreen' });
+       region: reg,
+      });
   });
 
   // Sort the pie chart data by the quantity in descending order
@@ -107,29 +116,50 @@ const colors = ['red', 'green', 'blue', 'orange', 'purple', 'pink', 'gray', 'bro
   });
 
   // Take only the top 10 alpha3 objects
-  pieChartData = pieChartData.slice(0, 10);
+  // pieChartData = pieChartData.slice(0, 10);
 
   // Set the pie chart parameters
-  const pieChart = [{
-    values: pieChartData.map(function(item) { return item.quantity; }),
-    labels: pieChartData.map(function(item) { return item.subregion; }),
-    type: "pie"
-  }];
+  const pieChart = [{  values: pieChartData.map(function(item) { return item.quantity; }),  
+    labels: pieChartData.map(function(item) { return item.subregion + "," + item.region; }),  
+    type: "pie",
+    
+    }];
 
   // Set the size of the chart visualization and title
-  const layout = {
-    paper_bgcoler:'green',
-    width: 1400,
-    height: 500,
-    grid: { rows: 1, columns: 1 },
+  const barLayout = {
+    // paper_bgcolor:'lawngreen',
+    width: 1700,
+    height:600,
+    font: {
+      size: 20
+    },
+    title: 'top 10 countries for the selected energy',
+    // grid: { rows: 1, columns: 1 },
+    margin: { t: 80, l: 30, r: 30, b: 80 },
+  };
+  const pieLayout = {
+    // paper_bgcolor:'lawngreen',
+    width: 1700,
+    height:600,
+    font: {
+      size: 20
+    },
+    colorway:['#fa6e6e', '#ea6589', '#cf659e', '#ac68ab', '#846bae', '#5d6ca7', '#3a6a98', '#236483', '#215d6d', '#2a5458'],
+    title: 'top 10 subregions for the selected energy',
+    
+    // grid: { rows: 1, columns: 1 },
     margin: { t: 80, l: 30, r: 30, b: 80 },
   };
 
   // Create the charts using Plotly
 
-  Plotly.newPlot("bar", barChart, layout);
-  Plotly.newPlot("pie", pieChart, layout);
+  Plotly.newPlot("bar", barChart, barLayout);
+  Plotly.newPlot("pie", pieChart, pieLayout);
 }
 
+// function init(){
 
-
+//   let selectedValue = 'totalconsumption'
+//   updateCharts(selectedValue)
+// }
+// init()
