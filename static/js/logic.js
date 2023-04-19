@@ -7,10 +7,12 @@ let defaultSelectedValue = select.options[1].value;
 // Call the function to update all the charts based on the default selected value
 updateCharts(defaultSelectedValue);
 
+
+
 // Add event listener to detect when a new option is selected
 select.addEventListener("change", function() {
   // Get the selected value
-  let selectedValue = select.value;
+  const selectedValue = select.value;
 
   // Call the function to update all the charts based on the new selected value
   updateCharts(selectedValue);
@@ -30,7 +32,7 @@ function updateCharts(selectedValue) {
   });
 }
 
-function displayCharts(barData, pieData, mapData) {
+function displayCharts(barData, pieData) {
   console.log(`Bar Data`, barData);
   console.log(`Pie Data`, pieData);
   
@@ -85,7 +87,7 @@ const colors = ['#fa6e6e', '#ea6589', '#cf659e', '#ac68ab', '#846bae', '#5d6ca7'
       y: quantities,
       name: alpha3,
       type: "bar",
-      title: 'top ten countries',
+      title: "top ten countries",
       marker: {
         color: colors[i],
         line : {
@@ -128,7 +130,7 @@ const colors = ['#fa6e6e', '#ea6589', '#cf659e', '#ac68ab', '#846bae', '#5d6ca7'
   // Set the size of the chart visualization and title
   const barLayout = {
     // paper_bgcolor:'lawngreen',
-    width: 1700,
+    width: 1500,
     height:600,
     font: {
       size: 20
@@ -139,7 +141,7 @@ const colors = ['#fa6e6e', '#ea6589', '#cf659e', '#ac68ab', '#846bae', '#5d6ca7'
   };
   const pieLayout = {
     // paper_bgcolor:'lawngreen',
-    width: 1700,
+    width: 1500,
     height:600,
     font: {
       size: 20
