@@ -130,18 +130,23 @@ const colors = ['#fa6e6e', '#ea6589', '#cf659e', '#ac68ab', '#846bae', '#5d6ca7'
   // Set the size of the chart visualization and title
   const barLayout = {
     // paper_bgcolor:'lawngreen',
-    width: 1500,
+    width: 750,
     height:600,
     font: {
       size: 20
     },
     title: 'top 10 countries for the selected energy in Twh',
-    // grid: { rows: 1, columns: 1 },
-    margin: { t: 80, l: 30, r: 30, b: 80 },
+    grid: { rows: 1, columns: 1 },
+    margin: {  margin: {
+      l: 100,
+      r: 100,
+      t: 100,
+      b: 100
+    }},
   };
   const pieLayout = {
     // paper_bgcolor:'lawngreen',
-    width: 1500,
+    width: 900,
     height:600,
     font: {
       size: 20
