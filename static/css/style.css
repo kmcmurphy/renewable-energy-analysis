@@ -1,95 +1,56 @@
   /*  Style sheet for our awesome project*/
-    h1 {
-      border: 2px solid rgb(0, 0, 0);
-      border-radius: 25px;
-      outline: #3a6a98 groove 5px;
-      margin: auto;  
-      padding: 50px;
-      text-align: center;
-      height: 100px;
-      animation-name: swirl;
-      animation-duration: 5s;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-      font-size:xx-large
+  h1 {
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    outline: #3a6a98 groove 5px;
+    margin: auto;
+    padding: 50px;
+    text-align: center;
+    height: 100px;
+    animation-name: swirl;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    font-size: xx-large
+  }
+
+  h3 {
+    outline: #3a6a98 groove 5px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    text-align: left;
+    text-indent: 50px;
+    animation-name: swirl;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-delay: -.5s;
+
+  }
+
+  p {
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    outline: #3a6a98 groove 5px;
+    margin: auto;
+    padding: 50px;
+    text-align: center;
+    height: 50px;
+    animation-name: swirl;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-delay: -1s;
+    font-size: xx-large
+  }
+
+  /* set the animation frames */
+  @keyframes swirl {
+    from {
+      background-color: #fa6e6e;
     }
- 
-    h3{
-      outline: #3a6a98 groove 5px;
-      border: 2px solid rgb(0, 0, 0);
-      border-radius: 25px;
-      text-align: left;
-      text-indent: 50px;
-      animation-name: swirl;
-      animation-duration: 5s;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-      animation-delay: -.5s;
-     
+
+    to {
+      background-color: #2a5458
     }
-
-    p {
-      border: 2px solid rgb(0, 0, 0);
-      border-radius: 25px;
-      outline: #3a6a98 groove 5px;
-      margin: auto;  
-      padding: 50px;
-      text-align: center;
-      height: 50px;
-      animation-name: swirl;
-      animation-duration: 5s;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-      animation-delay: -1s;
-      font-size:xx-large
-    }
-
-    /* the year slider parameters */
-    /* input[type=range] {
-        -webkit-appearance: none;
-        width: 100%;
-        height: 10px;
-        background-image: repeating-linear-gradient(200deg, #fa6e6e, #ea6589, #cf659e, #ac68ab, #846bae, #5d6ca7, #3a6a98, #236483, #215d6d, #2a5458);
-        border-radius: 25px;
-         outline: #846bae groove 5px;
-      }
-      
-      input[type=range]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 20px;
-        height: 20px;
-        background: #000000;
-        cursor: pointer;
-        border-radius: 25px; */
-        
-      /* } */
-      /* set the animation frames */
-      @keyframes swirl {
-        from {background-color: #fa6e6e;}
-        to {background-color: #2a5458}
-      }
-     
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+  }
