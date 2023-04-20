@@ -1,4 +1,4 @@
-  
+  /*  Style sheet for our awesome project*/
     h1 {
       border: 2px solid rgb(0, 0, 0);
       border-radius: 25px;
@@ -7,9 +7,6 @@
       padding: 50px;
       text-align: center;
       height: 100px;
-      
-      /* background-color: rgb(0, 0, 0); /* For browsers that do not support gradients */
-      /* background-image: repeating-linear-gradient(200deg, #fa6e6e, #ea6589, #cf659e, #ac68ab, #846bae, #5d6ca7, #3a6a98, #236483, #215d6d, #2a5458); */ 
       animation-name: swirl;
       animation-duration: 5s;
       animation-iteration-count: infinite;
@@ -18,10 +15,6 @@
     }
  
     h3{
-      /* border: 2px solid black; */
-      /* outline: #846bae solid 5px; */
-      /* margin: auto;   */
-      /* padding: 20px; */
       outline: #3a6a98 groove 5px;
       border: 2px solid rgb(0, 0, 0);
       border-radius: 25px;
@@ -34,10 +27,7 @@
       animation-delay: -.5s;
      
     }
-    @keyframes swirl {
-        from {background-color: #fa6e6e;}
-        to {background-color: #2a5458}
-      }
+
     p {
       border: 2px solid rgb(0, 0, 0);
       border-radius: 25px;
@@ -53,7 +43,9 @@
       animation-delay: -1s;
       font-size:xx-large
     }
-    input[type=range] {
+
+    /* the year slider parameters */
+    /* input[type=range] {
         -webkit-appearance: none;
         width: 100%;
         height: 10px;
@@ -69,32 +61,15 @@
         height: 20px;
         background: #000000;
         cursor: pointer;
-        border-radius: 25px;
+        border-radius: 25px; */
         
+      /* } */
+      /* set the animation frames */
+      @keyframes swirl {
+        from {background-color: #fa6e6e;}
+        to {background-color: #2a5458}
       }
-      /* .slider-label {
-        /* position: absolute; */
-        /* display: block; */
-        /* width: 1.5em;
-        height: 1.5em;
-        margin-top: -0.75em; */
-        /* background-color: rgb(10, 244, 178);
-        border: 1px solid rgb(255, 255, 255);
-        border-radius: 50%;
-        text-decoration-color: #846bae;
-        text-align: center;
-        line-height: 1.5em;
-        font-size: 0.8em;
-        font-weight: bold; */
-      /* } */ 
-      
-      /* .min-label {
-        left: 0;
-      }
-      
-      .max-label {
-        right: 0;
-      } */
+     
       
 
 

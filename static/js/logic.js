@@ -25,22 +25,24 @@ function updateCharts(selectedValue) {
     // The data is the same for both charts. Give a name for each chart data
     const barData = data;
     const pieData = data;
-    
+    const mapData = data;
 
     // Create the bar chart and pie chart using the data
-    displayCharts(barData, pieData);
+    displayCharts(barData, pieData,mapData);
   });
 }
 
-function displayCharts(barData, pieData) {
+function displayCharts(barData, pieData, mapData) {
   console.log(`Bar Data`, barData);
   console.log(`Pie Data`, pieData);
-  
+  console.log(`Map Data`, mapData);
+
   // Extract the necessary data for the charts
   let barChartData = [];
   let pieChartData = [];
   let alpha3Array = [];
-  
+  let bubbleChartData = [];
+
   // Loop through the data to extract the necessary information for the bar chart
   barData.forEach(function(item) {
     let alpha3 = item.alpha3;
@@ -73,8 +75,8 @@ function displayCharts(barData, pieData) {
   // Set the bar chart parameters
   const barChart = [];
 
-// Define an array of colors for the bars
-const colors = ['#fa6e6e', '#ea6589', '#cf659e', '#ac68ab', '#846bae', '#5d6ca7', '#3a6a98', '#236483', '#215d6d', '#2a5458'];
+  // Define an array of colors for the bars
+  const colors = ['#fa6e6e', '#ea6589', '#cf659e', '#ac68ab', '#846bae', '#5d6ca7', '#3a6a98', '#236483', '#215d6d', '#2a5458'];
 
   // Loop through the top 10 alpha3 objects to create the traces for the bar chart
   barChartData.forEach(function(alpha3Data, i) {
@@ -116,8 +118,8 @@ const colors = ['#fa6e6e', '#ea6589', '#cf659e', '#ac68ab', '#846bae', '#5d6ca7'
   pieChartData.sort(function(a, b) {
     return b.quantity - a.quantity;
   });
+ 
 
-  // Take only the top 10 alpha3 objects
   // pieChartData = pieChartData.slice(0, 10);
 
   // Set the pie chart parameters
@@ -129,7 +131,6 @@ const colors = ['#fa6e6e', '#ea6589', '#cf659e', '#ac68ab', '#846bae', '#5d6ca7'
 
   // Set the size of the chart visualization and title
   const barLayout = {
-    // paper_bgcolor:'lawngreen',
     width: 750,
     height:600,
     font: {
@@ -145,7 +146,6 @@ const colors = ['#fa6e6e', '#ea6589', '#cf659e', '#ac68ab', '#846bae', '#5d6ca7'
     }},
   };
   const pieLayout = {
-    // paper_bgcolor:'lawngreen',
     width: 900,
     height:600,
     font: {
@@ -154,19 +154,55 @@ const colors = ['#fa6e6e', '#ea6589', '#cf659e', '#ac68ab', '#846bae', '#5d6ca7'
     colorway:['#fa6e6e', '#ea6589', '#cf659e', '#ac68ab', '#846bae', '#5d6ca7', '#3a6a98', '#236483', '#215d6d', '#2a5458'],
     title: 'top 10 subregions for the selected energy in Twh',
     
-    // grid: { rows: 1, columns: 1 },
-    margin: { t: 80, l: 30, r: 30, b: 80 },
+  
+    margin: { t: 100, l: 100, r: 100, b: 100 },
   };
+
+
+
+// Loop through the data to extract the necessary information for the bubble chart
+mapData.forEach(function(item) {
  
+  let alpha3 = item.alpha3;
+  let quantity = item.quantity;
+  let year = item.year;
+
+  bubbleChartData.push({ alpha3: alpha3, quantity: quantity, year: year });
+});
+
+// Set the bubble chart parameters
+const bubbleChart = [{
+  x: bubbleChartData.map(function(item) { return item.year; }),
+  y: bubbleChartData.map(function(item) { return item.quantity; }),
+  mode: 'markers',
+  marker: {
+    size: bubbleChartData.map(function(item) { return item.quantity; }),
+    sizemode: 'area',
+    sizeref: 100,
+    color: bubbleChartData.map(function(item) { return item.quantity; }),
+    colorscale: 'Electric',
+    colorbar: {
+      title: 'Quantity'
+    }
+  },
+  text: bubbleChartData.map(function(item) { return item.alpha3; })
+}];
+
+// Set the size of the chart visualization and title
+const bubbleLayout = {
+  width: 1500,
+  height: 500,
+  title: 'Bubble Chart for Energy Consumption',
+  geo: {
+    projection: {
+      type: 'equirectangular'
+    },
     
-  // Create the charts using Plotly
+  }
+};
 
-  Plotly.newPlot("bar", barChart, barLayout);
-  Plotly.newPlot("pie", pieChart, pieLayout);
- 
+// Plot the bubble chart
+Plotly.newPlot('bar', barChart, barLayout);
+Plotly.newPlot('pie', pieChart, pieLayout);
+Plotly.newPlot('bubble', bubbleChart, bubbleLayout);
 }
-
-
-
-
-
