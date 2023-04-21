@@ -178,7 +178,7 @@ function displayCharts(barData, pieData, bubbleData) {
       text: alpha3Data.data.map(function (item) { return item.alpha3; }),
       hovermode: "closest",
       hovertemplate:
-        `<b>Country Code${name}</br>` +
+        `<b></br>` +
         'Terawatt hours: %{y:.2f}<br>' +
         'Year %{x:}</b>',
     });
