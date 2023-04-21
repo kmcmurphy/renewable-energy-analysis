@@ -1,0 +1,56 @@
+  /*  Style sheet for our awesome project*/
+  h1 {
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    outline: #3a6a98 groove 5px;
+    margin: auto;
+    padding: 50px;
+    text-align: center;
+    height: 100px;
+    animation-name: swirl;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    font-size: xx-large
+  }
+
+  h3 {
+    outline: #3a6a98 groove 5px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    text-align: left;
+    text-indent: 50px;
+    animation-name: swirl;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-delay: -.5s;
+
+  }
+
+  p {
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    outline: #3a6a98 groove 5px;
+    margin: auto;
+    padding: 50px;
+    text-align: center;
+    height: 50px;
+    animation-name: swirl;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-delay: -1s;
+    font-size: xx-large
+  }
+
+  /* set the animation frames */
+  @keyframes swirl {
+    from {
+      background-color: #fa6e6e;
+    }
+
+    to {
+      background-color: #2a5458
+    }
+  }

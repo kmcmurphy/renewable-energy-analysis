@@ -3,85 +3,111 @@
 
 <head>
   <meta charset="UTF-8">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
   <title>Energy Data Visualizations</title>
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+  <div id="radar"></div>
+
+  <style>
+    #radar{
+      position: fixed;
+      top: 0;
+      right: 0;
+      padding: auto;
+      width: 5px;
+      height: 10000px;
+      background-color: lime;
+      transform-origin: 100% 0;
+      transform: rotate(30deg);
+    }
+  </style>
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin="" />
 
-     <!-- Our CSS -->
+  <!-- Our CSS -->
   <link rel="stylesheet" type="text/css" href="static/css/style.css">
 
 </head>
-   <!-- Our API Routes -->
 
 <body style="background-color:rgb(0, 0, 0);">
-  
   <div class="container">
-    <div class="row", style="background-color:rgb(0, 0, 0);">
-      <div class="col-md-12 jumbotron text-center", style="background-color:rgb(0, 0, 0);">
-        <h1 style="color: rgb(255, 255, 255);">Renewable Energy Analysis</h1>
-        <h2 style="color: rgb(255, 255, 255);">Visualizations of Energy Generation and Consumption by Energy Source</h2>
-        <h2 style="color: rgb(255, 255, 255);">From The Years 2000 Through 2021</h2>
-      </div>
-    </div>
-    <div class="row", style="background-color:#3a6a98;">
-      <div class="col-md-2">
-        <div class="well", style="background-color:rgb(0, 0, 0);;">
-          <h3 style="color: rgb(255, 255, 255);"> Energy Sources:<h3>
-      
-          <select id="select-table">
-            <option value="" selected disabled>Total Energy Consumption</option>
-            <option value="totalenergy">Total Energy Consumption</option>
-            <option value="hydrochange">Hydro Energy Change</option>
-            <option value="hydrogen">Hydro Energy Generation</option>
-            <option value="windchange">Wind Energy Change</option>
-            <option value="windgen">Wind Energy Generation</option>
-            <option value="solarchange">Solar Energy Change</option>
-            <option value="solargen">Solar Energy Generation</option>
-          </select>
-          <!-- <input  type="range" min="2000" max="2021" value="2000" class="slider" id="year-slider"> -->
-      
-        </div>
-        <div class="panel panel-primary">
-          <div class="panel-heading", style="background-color:#846bae;">
-            <h3 class="panel-title", style="color: rgb(0, 0, 0)", style="background-color:#090909;">The Top 10 Countries</h3>
+    <div class="row" , style="background-color:rgb(0, 0, 0);">
+      <div class="col-md-12 jumbotron text-center" , style="background-color:rgb(0, 0, 0);">
+        <h1 style="color: #000000;">Renewable Energy Analysis</br>Visualizations of Energy Generation and Consumption by
+          Energy Source</br>From The Years 2000 to 2021</h1>
+         
+        <h3 style="color: rgb(0, 0, 0);"> Energy Sources:</br>
+          <div id="button-container">
+            <button id="off-button", style="padding: 10px;     
+            border: 2px solid rgb(0, 0, 0);
+            border-radius: 25px;">Turn off Dino Radar</button>
           </div>
-          <div id="sample-energy-source" class="panel-body"></div>
-        </div>
+          <select id="select-table" , style="padding: 10px;     
+                  border: 2px solid rgb(0, 0, 0);
+                  border-radius: 25px;">
+        </h3>
+        <!-- Our API Routes -->
+        <option value="" selected disabled>Total Energy Consumption</option>
+        <option value="totalenergy">Total Energy Consumption</option>
+        <option value="hydrochange">Hydro Energy Change</option>
+        <option value="hydrogen">Hydro Energy Generation</option>
+        <option value="windchange">Wind Energy Change</option>
+        <option value="windgen">Wind Energy Generation</option>
+        <option value="solarchange">Solar Energy Change</option>
+        <option value="solargen">Solar Energy Generation</option>
+        </select>
       </div>
-      <div class="col-md-5", style="background-color:#2a5458;">
-        <div id="bar" style=" width: 1500px; height:100%;"></div>
-      </div>
-       
-        
-     
-      
-      <div class="col-md-5", style="background-color:#2a5458;">
-        <div id="pie" style=" width: 1500px; height:100%;"></div>
+      <p>The Energy Consumption and Generation Visualizations by Country, Region, and Sub-Region</p>
+      <div id="bar" style="  padding: 10px; height:100%;float:left"></div>
+      <div id="pie" style="  padding: 10px; height:100%;float:right"></div>
+    </div>
+  
+    <div class="row">
+      <h2 style="color: rgb(0, 0, 0)">Intended Year Slider</h2>
+      <div class="col-md-12" , style="background-color:#2a5458; 
+      outline: #3a6a98 groove 5px;
+      border: 2px solid rgb(0, 0, 0);
+      animation-name: swirl;
+      animation-duration: 2s;
+      animation-iteration-count: 300;
+      animation-direction: alternate;
+      animation-delay: -1.5s;
+      border-radius: 25px;">
+
+        <div id="bubble" style=" padding: 25px 50px 75px 100px; width: 100%; height:100%;  "></div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12", style="background-color:#2a5458;">
-        <div id="map" style=" width: 2000px; height:600px;"></div>
-        
 
-
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-    crossorigin=""></script>
     <!-- D3 JavaScript -->
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <!-- Our Main JavaScript -->
-  <!-- <script src="statis/js/logic.js"></script> -->
-  <script src="static/js/logic.js"></script>
-  <!-- <script src="static/js/map.js"></script> -->
-  <script src="static/js/map2.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- Plotly-->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Our Main JavaScript -->
+    <script src="static/js/logic.js"></script>
+    <!-- Our plugin Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+
+    
+
+    <script>
+       // Store the animation instance in a variable
+  anime({
+        targets: '#radar',
+        opacity: [0, 1, 0],
+        rotate: ['180deg', '0deg', '-30deg'],
+        duration: 4000,
+        loop: true,
+        easing: 'easeInOutQuad'
+      });
+       // Add an event listener to the off button
+  const offButton = document.querySelector('#off-button');
+  offButton.addEventListener('click', function() {
+    // Call the anime.remove() method to stop the animation
+    anime.remove('#radar');
+  });
+    </script>
 </body>
 
 </html>
